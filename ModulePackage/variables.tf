@@ -1,5 +1,5 @@
-variable "name" {
-    description = "name of the package"
+variable "resource_group_name" {
+    description = "name of the resource group"
     type = string
     default = ""
 }
@@ -10,10 +10,22 @@ variable "location" {
     default = ""
 }
 
+variable "virtual_network_name" {
+    description = "name of the virtual network"
+    type = string
+    default = ""
+}
+
 variable "address_space" {
     description = "network address of virtual network server"
     type = list(string)
     default = []
+}
+
+variable "sql_server_name" {
+    description = "name of the sql server"
+    type = string
+    default = ""
 }
 
 variable "sql_username" {
@@ -28,6 +40,12 @@ variable "sql_password" {
     type = string
     default = ""
     sensitive = true
+}
+
+variable "virtual_machine_name" {
+    description = "name of the vm"
+    type = string
+    default = ""
 }
 
 variable "vm_size" {

@@ -1,9 +1,26 @@
-variable "name" {
+variable "resource_group_name" {
     description = "name of the azure package"
     type = string
-    default = "myterraformPackage"
+    default = "myDeploymentRG"
 }
 
+variable "virtual_network_name" {
+    description = "name of the virtual network"
+    type = string
+    default = "myDeploymentVN"
+}
+
+variable "virtual_machine_name" {
+    description = "name of the vm"
+    type = string
+    default = "myDeploymentVM"
+}
+
+variable "sql_server_name" {
+    description = "name of the sql server"
+    type = string
+    default = "myDeploymentSQL"
+}
 variable "location" {
     description = "location of resource group"
     type = string

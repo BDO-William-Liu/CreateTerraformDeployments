@@ -1,7 +1,10 @@
 module "create-azure-package" {
     source = "./ModulePackage"
 
-    name = var.name
+    resource_group_name = var.resource_group_name
+    virtual_network_name = var.virtual_network_name
+    virtual_machine_name = var.virtual_machine_name
+    sql_server_name = var.sql_server_name
     location = var.location
     address_space = var.address_space
     sql_username = var.sql_username

@@ -18,19 +18,19 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "myResourceGroup" {
-    name = "${var.name}-rg"
+    name = var.resource_group_name
     location = var.location
 }
 
 resource "azurerm_virtual_network" "myAzureNetwork" {
-    name = "${var.name}-vn"
+    name = var.virtual_network_name
     resource_group_name = azurerm_resource_group.myResourceGroup.name
     address_space = var.address_space
     location = azurerm_resource_group.myResourceGroup.location
 }
 
 resource "azurerm_sql_server" "myAzureSQLServer" {
-  name = "${var.name}-sql"
+  name = var.sql_server_name
   resource_group_name = azurerm_resource_group.myResourceGroup.name
   location = azurerm_resource_group.myResourceGroup.location
   version = "12.0"  // changing this value will force a new resource to be created
@@ -39,14 +39,14 @@ resource "azurerm_sql_server" "myAzureSQLServer" {
 }
 
 resource "azurerm_subnet" "mySubnet" {
-  name                 = "${var.name}-subnet"
+  name                 = "${var.virtual_machine_name}-subnet"
   resource_group_name  = azurerm_resource_group.myResourceGroup.name
   virtual_network_name = azurerm_virtual_network.myAzureNetwork.name
   address_prefixes     = var.address_prefix
 }
 
 resource "azurerm_network_interface" "myNetworkInterface" {
-  name                = "${var.name}-interface"
+  name                = "${var.virtual_machine_name}-interface"
   location            = azurerm_resource_group.myResourceGroup.location
   resource_group_name = azurerm_resource_group.myResourceGroup.name
 
@@ -58,7 +58,7 @@ resource "azurerm_network_interface" "myNetworkInterface" {
 }
 
 resource "azurerm_virtual_machine" "myVM" {
-  name                  = "${var.name}-vm"
+  name                  = var.virtual_machine_name
   location              = azurerm_resource_group.myResourceGroup.location
   resource_group_name   = azurerm_resource_group.myResourceGroup.name
   network_interface_ids = [azurerm_network_interface.myNetworkInterface.id]
@@ -79,7 +79,7 @@ resource "azurerm_virtual_machine" "myVM" {
   }
 
   os_profile {
-    computer_name  = var.name
+    computer_name  = var.virtual_machine_name
     admin_username = var.vm_username
     admin_password = var.vm_password
   }
