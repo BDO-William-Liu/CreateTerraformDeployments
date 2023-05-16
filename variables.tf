@@ -30,7 +30,7 @@ variable "sql_password" {
     sensitive = true
 }
 
-variable "size" {
+variable "vm_size" {
     description = "the desired size for the virtual machine"
     type = string
     default = "Standard_DS1_v2"

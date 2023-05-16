@@ -62,7 +62,7 @@ resource "azurerm_virtual_machine" "myVM" {
   location              = azurerm_resource_group.myResourceGroup.location
   resource_group_name   = azurerm_resource_group.myResourceGroup.name
   network_interface_ids = [azurerm_network_interface.myNetworkInterface.id]
-  vm_size               = var.size
+  vm_size               = var.vm_size
 
   storage_os_disk {
     name              = "myOSDisk"
