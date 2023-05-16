@@ -1,5 +1,5 @@
-variable "rg_name" {
-    description = "name of the resource group"
+variable "name" {
+    description = "name of the package"
     type = string
     default = ""
 }
@@ -10,22 +10,10 @@ variable "location" {
     default = ""
 }
 
-variable "vn_name" {
-    description = "name of virtual network"
-    type = string
-    default = ""
-}
-
 variable "address_space" {
     description = "network address of virtual network server"
     type = list(string)
     default = []
-}
-
-variable "sql_name" {
-    description = "name of the sql server"
-    type = string
-    default = ""
 }
 
 variable "sql_username" {
@@ -40,12 +28,6 @@ variable "sql_password" {
     type = string
     default = ""
     sensitive = true
-}
-
-variable "vm_name" {
-    description = "the name of the virtual machine that is to be created"
-    type = string
-    default = ""
 }
 
 variable "size" {

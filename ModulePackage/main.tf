@@ -18,19 +18,19 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "myResourceGroup" {
-    name = var.rg_name
+    name = "${var.name}-rg"
     location = var.location
 }
 
 resource "azurerm_virtual_network" "myAzureNetwork" {
-    name = var.vn_name
+    name = "${var.name}-vn"
     resource_group_name = azurerm_resource_group.myResourceGroup.name
     address_space = var.address_space
     location = azurerm_resource_group.myResourceGroup.location
 }
 
 resource "azurerm_sql_server" "myAzureSQLServer" {
-  name = var.sql_name
+  name = "${var.name}-sql"
   resource_group_name = azurerm_resource_group.myResourceGroup.name
   location = azurerm_resource_group.myResourceGroup.location
   version = "12.0"  // changing this value will force a new resource to be created
@@ -39,14 +39,14 @@ resource "azurerm_sql_server" "myAzureSQLServer" {
 }
 
 resource "azurerm_subnet" "mySubnet" {
-  name                 = "${var.vm_name}-subnet"
+  name                 = "${var.name}-subnet"
   resource_group_name  = azurerm_resource_group.myResourceGroup.name
   virtual_network_name = azurerm_virtual_network.myAzureNetwork.name
   address_prefixes     = var.address_prefix
 }
 
 resource "azurerm_network_interface" "myNetworkInterface" {
-  name                = "${var.vm_name}-interface"
+  name                = "${var.name}-interface"
   location            = azurerm_resource_group.myResourceGroup.location
   resource_group_name = azurerm_resource_group.myResourceGroup.name
 
@@ -58,7 +58,7 @@ resource "azurerm_network_interface" "myNetworkInterface" {
 }
 
 resource "azurerm_virtual_machine" "myVM" {
-  name                  = var.vm_name
+  name                  = "${var.name}-vm"
   location              = azurerm_resource_group.myResourceGroup.location
   resource_group_name   = azurerm_resource_group.myResourceGroup.name
   network_interface_ids = [azurerm_network_interface.myNetworkInterface.id]
@@ -79,7 +79,7 @@ resource "azurerm_virtual_machine" "myVM" {
   }
 
   os_profile {
-    computer_name  = var.vm_name
+    computer_name  = var.name
     admin_username = var.vm_username
     admin_password = var.vm_password
   }

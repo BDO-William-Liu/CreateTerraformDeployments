@@ -1,7 +1,7 @@
-variable "rg_name" {
-    description = "name of the resource group"
+variable "name" {
+    description = "name of the azure package"
     type = string
-    default = "myterraformRG"
+    default = "myterraformPackage"
 }
 
 variable "location" {
@@ -10,22 +10,10 @@ variable "location" {
     default = "east us"
 }
 
-variable "vn_name" {
-    description = "name of virtual network"
-    type = string
-    default = "myterraformVN"
-}
-
 variable "address_space" {
     description = "network address of virtual network server"
     type = list(string)
     default = ["10.0.0.0/16"]
-}
-
-variable "sql_name" {
-    description = "name of the sql server"
-    type = string
-    default = "myterraformSQL"
 }
 
 variable "sql_username" {
@@ -40,12 +28,6 @@ variable "sql_password" {
     type = string
     default = "P@$$w0rd1234!"
     sensitive = true
-}
-
-variable "vm_name" {
-    description = "the name of the virtual machine that is to be created"
-    type = string
-    default = "myterraformVM"
 }
 
 variable "size" {
