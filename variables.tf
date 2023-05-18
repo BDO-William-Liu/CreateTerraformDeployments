@@ -19,7 +19,7 @@ variable "virtual_machine_name" {
 variable "sql_server_name" {
     description = "name of the sql server"
     type = string
-    default = "myDeploymentSQL"
+    default = "mydeploymentsql"
 }
 variable "location" {
     description = "location of resource group"
